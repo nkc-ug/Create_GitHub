@@ -13,12 +13,12 @@ const mainTheme = createTheme({
   },
   palette:{
       primary:{
-        main: '263159',
-        light: '495579',
-        dark: '251749'
+        main: '#263159',
+        light: '#495579',
+        dark: '#251749'
       },
       secondary:{
-        main: 'FFFBEB'
+        main: '#FFFBEB'
       }
       // https://colorhunt.co/palette/fffbeb495579263159251749
   }
