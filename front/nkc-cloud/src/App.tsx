@@ -1,5 +1,5 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import PageRouter from "./router/pageRouter";
+import PageRouter from "./router/PageRouter";
 
 const mainTheme = createTheme({
   typography: {
