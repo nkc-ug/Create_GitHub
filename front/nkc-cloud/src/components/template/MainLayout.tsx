@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
-import { TTsxChild } from "../../util/tsType";
+import { TsxChild } from "../../util/tsType";
 import NavBar from "../organism/NavBar";
 
-const MainLayout:React.FC<TTsxChild> = (props) => {
+const MainLayout:React.FC<TsxChild> = (props) => {
     return(
         <Box sx={{ bgcolor:'primary.light'}}>
             <NavBar/>
