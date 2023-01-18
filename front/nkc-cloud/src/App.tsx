@@ -23,7 +23,7 @@ const mainTheme = createTheme({
       },
       secondary:{
         main: '#FFFBEB',
-        dark: '#DDD8C7'
+        dark: '#E4DFCF'
       }
       // https://colorhunt.co/palette/fffbeb495579263159251749
   }
