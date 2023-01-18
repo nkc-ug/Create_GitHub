@@ -36,7 +36,7 @@ const NavBar:React.FC = () => {
             {/* forPC */}
             <Container maxWidth="xl">
                 <Toolbar sx={{ display:{ xs:'none', md: 'flex' } }}>
-                    <Button onClick={chengeHome} sx={{ my:0.5 }}>
+                    <Button onClick={chengeHome} sx={{ my:1 }}>
                         <img src={logo} alt="logo" width={120}/>
                     </Button>
                     <Box sx={{ ml:'auto'}}>
