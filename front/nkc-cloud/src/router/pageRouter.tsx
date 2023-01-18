@@ -3,11 +3,12 @@ import ErrorPage from "../components/pages/ErrorPage";
 import HomePage from "../components/pages/HomePage";
 
 const PageRouter:React.FC = () => {
+    console.log("log")
     return(
         <BrowserRouter>
             <Routes>
-                <Route path={"./"} element={<HomePage/>}/>
-                <Route path={"./*"} element={<ErrorPage/>}/>
+                <Route path={"/"} element={<HomePage/>}/>
+                <Route path={"/*"} element={<ErrorPage/>}/>
             </Routes>
         </BrowserRouter>
     )
