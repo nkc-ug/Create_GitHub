@@ -22,7 +22,8 @@ const mainTheme = createTheme({
         dark: '#251749'
       },
       secondary:{
-        main: '#FFFBEB'
+        main: '#FFFBEB',
+        dark: '#ccc8b9'
       }
       // https://colorhunt.co/palette/fffbeb495579263159251749
   }
