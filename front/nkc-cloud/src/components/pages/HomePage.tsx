@@ -2,8 +2,8 @@ import MainLayout from "../template/MainLayout";
 
 const HomePage:React.FC = () =>{
     return(
-        <MainLayout>
-            <div>ホームページ</div>
+        <MainLayout >
+            <div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></div>
         </MainLayout>
     )
 }
