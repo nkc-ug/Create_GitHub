@@ -1,25 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import PageRouter from "./router/PageRouter";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+const mainTheme = createTheme({
+  typography: {
+    fontFamily:[
+      'Roboto',
+      '"Noto Sans JP"', 
+      '"Helvetica"',
+      'Arial',
+      'sans-serif',
+    ].join(',')
+  },
+  palette:{
+      primary:{
+        main: '#263159',
+        light: '#495579',
+        dark: '#251749'
+      },
+      secondary:{
+        main: '#FFFBEB',
+        dark: '#E4DFCF'
+      }
+      // https://colorhunt.co/palette/fffbeb495579263159251749
+  }
+
+})
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={mainTheme}>
+      <CssBaseline/>
+      <PageRouter/>
+    </ThemeProvider>
   );
 }
 
