@@ -3,7 +3,6 @@ import ErrorPage from "../components/pages/ErrorPage";
 import HomePage from "../components/pages/HomePage";
 
 const PageRouter:React.FC = () => {
-    console.log("log")
     return(
         <BrowserRouter>
             <Routes>
