@@ -19,12 +19,10 @@ GET /api/v1/users/{user_id}/index
 |param|type|description|
 |---|---|---|
 |id|integer|投稿id|
+|title|string|記事のタイトル|
 |url|string|記事のurl|
 |created_at|datetime|作成時刻|
 |updated_at|datetime|最終変更時刻|
-|user_id|integer|(ログインしている)ユーザのid|
-|name|string|名前|
-|password|string|パスワード|
 
 ```javascript
 {
@@ -32,11 +30,10 @@ GET /api/v1/users/{user_id}/index
     "message": "Loaded users,posts",
     "data": {
         "id": 1,
+　　　　　“title”: “NKC”,
         “url”: “https://aiueo.com/ooo”,
         "created_at": "2023-01-16T13:51:33.951Z",
-        "updated_at": "2023-01-16T13:51:33.951Z",
-        “name”: “aichi”,
-        “password”: “nagoya”
+        "updated_at": "2023-01-16T13:51:33.951Z"
     }
 }
 ```
@@ -202,21 +199,15 @@ Res
 ```
 |param|type|description|
 |---|---|---|
-|Id|integer|ユーザid|
 |name|string|名前|
 |password|string|パスワード|
-|created_at|datetime|作成時刻|
-|updated_at|datetime|最終変更時刻|
 ```javascript
 {
     "status": "SUCCESS",
     "message": "Loaded users",
     "data": {
-        "id": 1,
         “name”: “aichi”,
-        “password”: “nagoya”,
-        "created_at": "2023-01-16T13:51:33.951Z",
-        "updated_at": "2023-01-16T13:51:33.951Z"
+        “password”: “nagoya”
     }
 }
 ```
@@ -245,8 +236,6 @@ DELETE /api/v1/users/{user_id}
 |Id|integer|ユーザid|
 |name|string|名前|
 |password|string|パスワード|
-|created_at|datetime|作成時刻|
-|updated_at|datetime|最終変更時刻|
 ```javascript
 {
     "status": "SUCCESS",
@@ -255,8 +244,6 @@ DELETE /api/v1/users/{user_id}
         "id": 1,
         “name”: “aichi”,
         “password”: “nagoya”,
-        "created_at": "2023-01-16T13:51:33.951Z",
-        "updated_at": "2023-01-16T13:51:33.951Z"
     }
 }
 ```
@@ -287,6 +274,9 @@ GET /api/v1/posts/{url}
 |---|---|---|
 |Id|integer|投稿id|
 |url|string|ダウンロードしたい記事のurl|
+|title|string|ダウンロードしたい記事のタイトル|
+|comment|tring|ダウンロードしたい記事のコメント|
+|date|date|有効期限|
 |created_at|datetime|作成時刻|
 |updated_at|datetime|最終変更時刻|
 ```javascript
@@ -296,6 +286,9 @@ GET /api/v1/posts/{url}
     "data": {
         "id": 1,
         “url”: “https://aiueo.com/ooo”,
+        “title”: “NKC”,
+        “comment": “名古屋工学院専門学校”, 
+        “date”: “2023-01-17”, 
         "created_at": "2023-01-16T13:51:33.951Z",
         "updated_at": "2023-01-16T13:51:33.951Z"
     }
@@ -309,13 +302,12 @@ GET /api/v1/posts/{url}
 
 # ダウンロード API
 ```
-GET /api/v1/posts/{url}/download
+GET /api/v1/posts/{url}/{key}/download
+パスワードがないものは　0000 にして送信する
 ```
 |param|type|description|
 |---|---|---|
 |url|string|ダウンロードしたい記事のurl|
-|title|string|ダウンロードしたい記事のタイトル|
-|comment|tring|ダウンロードしたい記事のコメント|
 |key|string|ダウンロードしたい記事のパスワード|
 |date|date|ダウンロードしたい記事の有効期限|
 
@@ -338,7 +330,6 @@ GET /api/v1/posts/{url}/download
     "message": "Loaded posts",
     "data": {
         "id": 1,
-        "url": “https://aiueo.com/sryuhikd”,
         “content”: “test.xlsm”,
         "created_at": "2023-01-16T13:51:33.951Z",
         "updated_at": "2023-01-16T13:51:33.951Z"
