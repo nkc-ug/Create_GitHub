@@ -320,7 +320,6 @@ GET /api/v1/posts/{url}/{key}/download
 |param|type|description|
 |---|---|---|
 |Id|integer|投稿id|
-|url|string|ダウンロードしたい記事のurl|
 |content|string|ダウンロードしたい記事のファイル|
 |created_at|datetime|作成時刻|
 |updated_at|datetime|最終変更時刻|
