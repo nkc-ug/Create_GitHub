@@ -6,6 +6,7 @@
 |url|string|記事のurl|
 |comment|string|コメント|
 |date|date|有効期限|
+|file_name|string|ファイルの名前|
 |key|string|パスワード|
 |user_id|integer|usersテーブルと関連づけるid|
 |created_at|datetime|作成時刻|
