@@ -116,6 +116,7 @@ DELETE /api/v1/posts/{id}
 |Id|integer|投稿id|
 |title|string|タイトル|
 |comment|string|コメント|
+|fail_name|string|ファイルの名前|
 |date|date|有効期限|
 |key|string|パスワード|
 |url(変更させない)|string|記事のurl|
@@ -129,7 +130,8 @@ DELETE /api/v1/posts/{id}
     "data": {
         "id": 1,
         “title”: “NKC”,
-        “”comment: “名古屋工学院専門学校”, 
+        “comment": “名古屋工学院専門学校”,
+        "fail_name": "nkc.xlsm"
         “date”: “2023-01-17”, 
         “key”: “nkcug”,
         “url”: “https://aiueo.com/ooo”,
@@ -161,6 +163,7 @@ POST /api/v1/posts
 |title|string|タイトル|
 |comment|tring|コメント|
 |key|string|パスワード|
+|fail_name|string|ファイルの名前|
 |date|date|有効期限|
 |url(変更させない)|string|記事のurl|
 |created_at|datetime|作成時刻|
@@ -172,7 +175,8 @@ POST /api/v1/posts
     "data": {
         "id": 1,
         “title”: “NKC”,
-        “”comment: “名古屋工学院専門学校”, 
+        “comment": “名古屋工学院専門学校”,
+        "fail_name": "nkc.xlsm"
         “date”: “2023-01-17”, 
         “key”: “nkcug”,
         “url”: “https://aiueo.com/ooo”,
