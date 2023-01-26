@@ -1,19 +1,55 @@
-import { Box, Button, Container, Modal, Stack, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Container, Modal, Stack, TextField, Typography } from "@mui/material";
 import MainLayout from "../template/MainLayout";
 import DriveFileMoveIcon from '@mui/icons-material/DriveFileMove';
 import homeRightPic from "../../img/homeRightPic.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SecondaryButton from "../atom/SecondaryButton";
 import PrimaryButton from "../atom/PrimaryButton";
+import axios from "../../util/axiosUtil";
+import { FileAboutCommentContext, FileAboutFileNameContext, FileAboutKeyContext, FileAboutLimitContext, FileAboutTitleContext, FileAboutUrlContext } from "../../App";
+
+// type FileAbout = {
+//     title: string,
+//     comment: string,
+//     pasward: string
+// }
 
 const HomePage:React.FC = () =>{
     const navigation = useNavigate();
-    const [ModalOpen, setModalOpen] = useState<boolean>(false);
+    const [AddModalOpen, setAddModalOpen] = useState<boolean>(false);
+    const [SendModalOpen, setSendModalOpen] = useState<boolean>(false);
+    const [AddFileList, setAddFileList] = useState<File | null>(null);
 
-    const addFile = () => {
-        setModalOpen(!ModalOpen);
-        navigation("/");
+    // const [FileAbout, setFileAbout] = useState<FileAbout>({} as FileAbout);
+    const {state:FileAboutTitle, setState:setFileAboutTitle} = useContext(FileAboutTitleContext);
+    const {state:FileAboutComment, setState:setFileAboutComment} = useContext(FileAboutCommentContext);
+    const {setState:setFileAboutFileName} = useContext(FileAboutFileNameContext);
+    const {setState:setFileAboutLimit} = useContext(FileAboutLimitContext);
+    const {state:FileAboutKey, setState:setFileAboutKey} = useContext(FileAboutKeyContext);
+    const {setState:setFileAboutUrl} = useContext(FileAboutUrlContext);
+
+    const addFileComplete = () => {
+        setAddModalOpen(!AddModalOpen);
+        setSendModalOpen(!SendModalOpen);
+        setAddFileList(null);
+        axios.post(`api/v1/posts/${FileAboutTitle}/${FileAboutComment}/${FileAboutKey}/${AddFileList}`)
+        .then((res) => {
+            setSendModalOpen(!setSendModalOpen);
+            setFileAboutFileName(res.data.fail_name);
+            setFileAboutLimit(res.data.date);
+            setFileAboutUrl(res.data.key);
+            navigation("/SendPage");
+        })
+    }
+
+    const addFile = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const tempFileList = e.target.files
+        if (tempFileList && tempFileList[0]){
+            setAddFileList(tempFileList[0])
+            setFileAboutTitle(tempFileList[0].name);
+            
+        }
     }
 
     const titleText = <>
@@ -40,7 +76,7 @@ const HomePage:React.FC = () =>{
                             {subTitleText}
                         </Typography>
                         <Box sx={{ mt:3 }}>
-                            <SecondaryButton state={ModalOpen} stateAction={setModalOpen} icon={<DriveFileMoveIcon/>} label="ファイルを登録"/>
+                            <SecondaryButton state={AddModalOpen} stateAction={setAddModalOpen} icon={<DriveFileMoveIcon/>} label="ファイルを登録"/>
                         </Box>
                     </Box>
                     <Box sx={{ ml:8, p:3, boxShadow:2, borderRadius:5, bgcolor:'secondary.main' }}>
@@ -60,7 +96,7 @@ const HomePage:React.FC = () =>{
                             {subTitleText}
                         </Typography>
                         <Stack justifyContent='center' sx={{ mx:8, mt:3 }}>
-                            <SecondaryButton state={ModalOpen} stateAction={setModalOpen} icon={<DriveFileMoveIcon/>} label="ファイルを登録"/>
+                            <SecondaryButton state={AddModalOpen} stateAction={setAddModalOpen} icon={<DriveFileMoveIcon/>} label="ファイルを登録"/>
                         </Stack>
                         <Box sx={{ mt:5, p:3, boxShadow:2, borderRadius:5, bgcolor:'secondary.main' }}>
                             <img src={homeRightPic} alt="イメージ画像" width="100%"/>
@@ -70,8 +106,9 @@ const HomePage:React.FC = () =>{
                 {/*ここの br　は後で消す */}
                 <div><br/><br/><br/><br/><br/><br/></div>
             </MainLayout>
-
-            <Modal open={ModalOpen} onClose={() => {setModalOpen(!ModalOpen)}}>
+            
+            {/* AddModal */}
+            <Modal open={AddModalOpen} onClose={() => {setAddModalOpen(!AddModalOpen)}}>
                 <Container
                     maxWidth='xs'
                     sx={{
@@ -83,14 +120,83 @@ const HomePage:React.FC = () =>{
                         border: '0.5px solid',
                         borderRadius: 5,
                         boxShadow: 10,
-                        p: 5
+                        p: 2,
+                        py: 4
                     }}
                 >
-                    <Typography variant="h6" textAlign='center'>
-                        ファイルを選択する
-                    </Typography>
-                    <Stack direction='column' justifyContent='center' sx={{ mt:30, mx:10 }}> {/*ここの mt は後で消す*/}
-                        <PrimaryButton label="決定" stateAction={addFile}/>
+                    <Stack sx={{ mx:8 }}>
+                        <Box sx={{ mb:4 }}>
+                            <Typography textAlign='center' noWrap={true} sx={{ mb:0.5 }}>
+                                選択済みのファイル
+                            </Typography>
+                            <Box border='solid 0.5px' height='80px' borderRadius={2}>
+                                <Stack justifyContent="space-between" spacing={2} sx={{ my:2 }}>
+                                    <Typography textAlign='center'>
+                                        {AddFileList?.name}
+                                    </Typography>
+                                </Stack>
+                            </Box>
+                        </Box>
+                        <Stack justifyContent='space-between' direction="row" sx={{ pb:3, mx:3 }}>
+                            <label htmlFor='uploadButton'>
+                                <Stack justifyContent='center'>
+                                    <Button variant="outlined" component="span" onClick={() => {setAddFileList(null)}}>
+                                        <Typography variant='body1' noWrap={true}>
+                                            追加する
+                                        </Typography>
+                                    </Button>
+                                </Stack>
+                                <input
+                                    id='uploadButton'
+                                    multiple
+                                    type="file"
+                                    style={{ display:'none' }}
+                                    onChange={addFile}
+                                />
+                            </label>
+                            <Button variant="outlined" component="span">
+                                <Typography variant='body1' noWrap={true} onClick={() => {setAddFileList(null)}}>
+                                    削除する
+                                </Typography>
+                            </Button>
+                        </Stack>
+                        <Stack direction='column'>
+                            <TextField value={FileAboutTitle}  onChange={(e:React.ChangeEvent<HTMLInputElement>) => {setFileAboutTitle(e.target.value)}} id="title" label='タイトル' variant="outlined" sx={{ mb:2 }}/>
+                            <TextField value={FileAboutComment}  onChange={(e:React.ChangeEvent<HTMLInputElement>) => {setFileAboutComment(e.target.value)}} id="comment" label='コメント' variant="outlined" sx={{ mb:2 }}/>
+                            <TextField value={FileAboutKey}  onChange={(e:React.ChangeEvent<HTMLInputElement>) => {setFileAboutKey(e.target.value)}} id="pasward" label='パスワード' variant="outlined" sx={{ mb:1 }}/>
+                            <Typography noWrap={true} textAlign='center' variant="caption" sx={{ mb:2 }}>
+                                パスワード・コメントが必要ない場合は<br/>未入力のまま送信できます。
+                            </Typography>
+                            <PrimaryButton label="決定" stateAction={addFileComplete}/>
+                        </Stack>
+                    </Stack>
+                </Container>
+            </Modal>
+
+            {/* SendModal */}
+            <Modal open={SendModalOpen} onClose={() => {setSendModalOpen(!SendModalOpen)}}>
+                <Container
+                    maxWidth='xs'
+                    sx={{
+                        position: 'absolute' as 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        bgcolor: 'secondary.main',
+                        border: '0.5px solid',
+                        borderRadius: 5,
+                        boxShadow: 10,
+                        p: 2,
+                        py: 4
+                    }}
+                >
+                    <Stack sx={{ mx:8 }}>
+                        <Typography textAlign='center' noWrap={true} sx={{ mb:0.5 }}>
+                                ファイルをアップロードしています
+                            </Typography>
+                        <Stack justifyContent='center' direction="row">
+                            <CircularProgress sx={{ m:3 }}/>
+                        </Stack>
                     </Stack>
                 </Container>
             </Modal>
