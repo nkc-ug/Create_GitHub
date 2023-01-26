@@ -9,6 +9,6 @@ services:
     volumes:
       - ./:/src
     ports:
-      - "3000:3000"
+      - "3005:3000"
     environment:
       - CHOKIDAR-USEPOLLING=true
