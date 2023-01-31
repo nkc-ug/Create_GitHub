@@ -1,14 +1,28 @@
-// import { SvgIconTypeMap } from "@mui/material"
-// import { OverridableComponent } from "@mui/material/OverridableComponent"
+import { SvgIconTypeMap } from "@mui/material"
+import { OverridableComponent } from "@mui/material/OverridableComponent"
 
-export type TsxChild = {
+export type TsxChildType = {
     children: React.ReactNode
 }
 
-// 後で修正して適用する
-// export type SecondaryButton = {
-//     state: boolean,
-//     stateAction: React.SetStateAction<boolean>,
-//     icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">>,
-//     label: String,
-// }
+export type ButtonType = {
+    state: boolean,
+    stateAction: React.SetStateAction<boolean>,
+    icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">>,
+    label: String,
+}
+
+export type FileAboutType = {
+    title: string,
+    comment: string,
+    fileName: string,
+    key: string,
+    limit:string,
+    url: string
+}
+
+export type FileAboutContextType = {
+    state : FileAboutType;
+    setState: React.Dispatch<React.SetStateAction<FileAboutType>>;
+};
+  

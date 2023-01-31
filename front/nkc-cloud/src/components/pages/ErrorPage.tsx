@@ -1,4 +1,4 @@
-import MainLayout from "../template/MainLayout";
+import MainLayout from "../template/BaseLayout";
 
 const ErrorPage:React.FC = () =>{
     return(

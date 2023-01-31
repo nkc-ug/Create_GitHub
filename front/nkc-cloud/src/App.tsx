@@ -4,6 +4,8 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import { createContext, useState } from "react";
+import { FileAboutContextType, FileAboutType } from "./util/tsType";
 
 const mainTheme = createTheme({
   typography: {
@@ -27,14 +29,26 @@ const mainTheme = createTheme({
       }
       // https://colorhunt.co/palette/fffbeb495579263159251749
   }
-
 })
 
+export const FileAboutContext = createContext<FileAboutContextType>({} as FileAboutContextType);
+
 function App() {
+  const [FileAbout, setFileAbout] = useState<FileAboutType>({
+    title: "",
+    comment: "",
+    fileName: "",
+    key: "",
+    limit: "",
+    url: ""
+  });
+
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline/>
-      <PageRouter/>
+        <FileAboutContext.Provider value={{state:FileAbout, setState:setFileAbout}}>
+          <PageRouter/>
+        </FileAboutContext.Provider>
     </ThemeProvider>
   );
 }

@@ -1,13 +1,11 @@
 import { Button, Typography } from "@mui/material";
-import { Box } from "@mui/system";
 
 const PrimaryButton= (props) => {
+    const { state, stateAction, icon, label } = props;
     return(
-        <Button variant="contained"  onClick={() => {props.stateAction(!props.state)}} sx={{ p:1, px:2 }}>
-            {props.icon}
-            <Box sx={{ mr:1 }} />
+        <Button startIcon={icon} variant="contained" onClick={() => {stateAction(!state)}} sx={{ p:1, px:2 }}>
             <Typography variant="h6" noWrap={true}>
-                {props.label}
+                {label}
             </Typography>
         </Button>
     )
