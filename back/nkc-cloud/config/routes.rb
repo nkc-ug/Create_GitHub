@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'posts#top'
+  get "https://aaa.com/:url" => "posts#top"
   namespace 'api' do
     namespace 'v1' do
       resources :posts

@@ -28,7 +28,9 @@
 /tmp/storage/*
 !/tmp/storage/
 !/tmp/storage/.keep
-/public/files/*
+/public/files/**
+!/public/files/**/
+!/public/files/.gitkeep
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

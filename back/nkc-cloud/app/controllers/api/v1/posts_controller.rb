@@ -1,25 +1,22 @@
 class Api::V1::PostsController < ApplicationController
-    # def index
-    #   posts = Post.order(created_at: :asc)
-    #    posts = Post.where(user_id:params[:id])
-    #   render json: { status: 'SUCCESS', message: 'Loaded posts', data: posts }
-    # end
+  before_action :set_post, only: [:show, :update, :destroy]
+    def top
+      render file: "#{Rails.root}/public/index.html"
+    end
+    def index
+      posts = Post.order(created_at: :asc)
+       posts = Post.where(user_id:params[:id])
+      render json: { status: 'SUCCESS', message: 'Loaded posts', data: posts }
+    end
   
     def show
-      # begin
-        post = Post.find(params[:id])
-      # rescue
-      #   render json: { status: '404', message: 'Not Found', data: params[:id] }
-      # else
-        render json: { status: 'SUCCESS', message: 'Loaded the post', data: post }
-      # end
+      render json: { status: 'SUCCESS', message: 'Loaded the post', data: post }
     end
   
     def create
       post = Post.new(post_params)
       url = exist()
       post.url="https://aaa.com/#{url}"
-      # post.file_name=post.file_name.gsub(/ /, '_').gsub(/　/, '_')
       if post.save
         render json: { status: 'SUCCESS', data: post }
       else
@@ -28,15 +25,11 @@ class Api::V1::PostsController < ApplicationController
     end
   
     def destroy
-      post = Post.find(params[:id])
       post.destroy
       render json: { status: 'SUCCESS', message: 'Deleted the post', data: post }
     end
-    #ファイル名に空白が入っているとダウンロードできない
-    # post.file_name=post.file_name.gsub(/ /, '_').gsub(/　/, '_')
+    
     def update
-      post = Post.find(params[:id])
-      
       if post.update(post_params)
         render json: { status: 'SUCCESS', message: 'Updated the post', data: post }
       else
@@ -60,7 +53,7 @@ class Api::V1::PostsController < ApplicationController
       end
       post = Post.find_by(url:"https://aaa.com/#{params[:url]}",key: params[:key])
       begin
-      download_file_name = "public/files/#{post.file_name}"
+        download_file_name = "public/files/#{post.file_name}"
       rescue
         render json: { status: 'SUCCESS', message: 'Not download', data: params[:key] }
       else
@@ -78,7 +71,16 @@ class Api::V1::PostsController < ApplicationController
     end
   
     private   #よく分からん
-  
+    
+    def set_post
+      # begin
+      post = Post.find(params[:id])
+      # rescue
+      #   render json: { status: '404', message: 'Not Found', data: params[:id] }
+      # else
+      # end
+    end
+
     def post_params
       params.require(:post).permit(:title,:comment,:date,:file_name,:key)
     end
