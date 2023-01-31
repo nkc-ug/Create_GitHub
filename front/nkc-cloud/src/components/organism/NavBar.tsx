@@ -3,34 +3,53 @@ import { Box, Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import logo from "../../img/logo.png";
+import { FileAboutContext } from "../../App";
 
 const NavBar:React.FC = () => {
     const navigation = useNavigate();
     const [ModalOpen, setModalOpen] = useState<boolean>(false);
+    const {state:FileAbout, setState:setFileAbout} = useContext(FileAboutContext);    
 
     const chengeUser = () => {
-        navigation("/")
+        deleteFileInfo();
+        navigation("/");
     }
 
     const chengeHome = () => {
-        navigation("/")
+        deleteFileInfo();
+        navigation("/");
     }
+
     const AppBarItemList = [
         {
             text:'NKC-Cloudとは',
             action: () => {
+                deleteFileInfo();
                 navigation("/");
+                
             }
         },
         {
             text:'使い方',
             action: () => {
+                deleteFileInfo();
                 navigation("/");
             }
         },
     ]
+
+    const deleteFileInfo = () => {
+        setFileAbout({
+            title: "",
+            comment: "",
+            fileName: "",
+            key: "",
+            limit: "",
+            url: ""
+        });
+    }
 
     return(
         <AppBar position='static' sx={{ bgcolor:'secondary.main' }}>
