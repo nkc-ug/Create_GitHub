@@ -346,3 +346,42 @@ GET /api/v1/posts/{url}/{key}/download
 ```
 404 Not Found
 ```
+
+## Req
+
+# ログイン API
+```
+GET /api/v1/users/login
+```
+
+## Res
+
+### 成功時
+```
+200 SUCCESS
+```
+|param|type|description|
+|---|---|---|
+|Id|integer|ユーザid|
+|name|string|名前|
+|password|string|パスワード|
+|created_at|datetime|作成時刻|
+|updated_at|datetime|最終変更時刻|
+```javascript
+{
+    "status": "SUCCESS",
+    "message": "Loaded users",
+    "data": {
+        "id": 1,
+        "name": “aichi”,
+        “password”: “nagoya”,
+        "created_at": "2023-01-16T13:51:33.951Z",
+        "updated_at": "2023-01-16T13:51:33.951Z"
+    }
+}
+```
+
+### 失敗時
+```
+404 Not Found
+```
