@@ -351,8 +351,13 @@ GET /api/v1/posts/{url}/{key}/download
 
 # ログイン API
 ```
-GET /api/v1/users/login
+GET /api/v1/users/{name}/{password}/login
 ```
+|param|type|description|
+|---|---|---|
+|name|string|ユーザ名|
+|password|string|パスワード|
+
 
 ## Res
 
