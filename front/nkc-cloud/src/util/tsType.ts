@@ -1,5 +1,6 @@
 import { SvgIconTypeMap } from "@mui/material"
 import { OverridableComponent } from "@mui/material/OverridableComponent"
+import React from "react"
 
 export type TsxChildType = {
     children: React.ReactNode
@@ -25,4 +26,14 @@ export type FileAboutContextType = {
     state : FileAboutType;
     setState: React.Dispatch<React.SetStateAction<FileAboutType>>;
 };
-  
+
+export type UserInfoType = {
+    auth: boolean,
+    userID: string,
+    name: string
+}
+
+export type UserInfoContextType = {
+    state : UserInfoType;
+    setState: React.Dispatch<React.SetStateAction<UserInfoType>>;
+}

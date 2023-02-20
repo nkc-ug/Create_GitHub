@@ -5,7 +5,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { createContext, useState } from "react";
-import { FileAboutContextType, FileAboutType } from "./util/tsType";
+import { FileAboutContextType, FileAboutType, UserInfoContextType, UserInfoType } from "./util/tsType";
 
 const mainTheme = createTheme({
   typography: {
@@ -33,6 +33,8 @@ const mainTheme = createTheme({
 
 export const FileAboutContext = createContext<FileAboutContextType>({} as FileAboutContextType);
 
+export const UserInfoContext = createContext<UserInfoContextType>({} as UserInfoContextType);
+
 function App() {
   const [FileAbout, setFileAbout] = useState<FileAboutType>({
     title: "",
@@ -43,11 +45,19 @@ function App() {
     url: ""
   });
 
+  const [UserInfo, setUserInfo] = useState<UserInfoType>({
+    auth: false,
+    userID: "",
+    name: ""
+  })
+
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline/>
         <FileAboutContext.Provider value={{state:FileAbout, setState:setFileAbout}}>
-          <PageRouter/>
+          <UserInfoContext.Provider value={{state:UserInfo, setState:setUserInfo}}>
+            <PageRouter/>
+          </UserInfoContext.Provider>
         </FileAboutContext.Provider>
     </ThemeProvider>
   );
