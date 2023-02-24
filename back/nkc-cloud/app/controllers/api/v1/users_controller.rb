@@ -6,7 +6,7 @@ class Api::V1::UsersController < ApplicationController
     @posts = Post.where(user_id: params[:user_id])
     user = User.find_by(id: params[:user_id])
     
-    render json: { status: 'SUCCESS', message: 'Loaded the user', data: [@data] }
+    render json: { status: 'SUCCESS', message: 'Loaded the user', data: [@posts,user] }
     
     
   end
