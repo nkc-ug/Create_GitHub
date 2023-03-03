@@ -4,7 +4,6 @@ class Api::V1::UsersController < ApplicationController
   def userindex
     posts = Post.where(user_id: params[:user_id])
     user = User.find_by(id: params[:user_id])
-
     render json: { status: 'SUCCESS', message: 'Loaded the user', data: [posts,user] }
   end
 
@@ -45,8 +44,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
    private
-
-  
 
   def user_params
     params.require(:user).permit(:name,:password)
