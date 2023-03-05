@@ -10,11 +10,11 @@ import { FileAboutContext } from "../../App";
 const NavBar:React.FC = () => {
     const navigation = useNavigate();
     const [ModalOpen, setModalOpen] = useState<boolean>(false);
-    const {state:FileAbout, setState:setFileAbout} = useContext(FileAboutContext);    
+    const {setState:setFileAbout} = useContext(FileAboutContext);    
 
     const chengeUser = () => {
         deleteFileInfo();
-        navigation("/");
+        navigation("/LoginPage");
     }
 
     const chengeHome = () => {
