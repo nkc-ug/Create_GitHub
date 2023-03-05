@@ -6,10 +6,12 @@ Rails.application.routes.draw do
 
     namespace 'api',format: 'json' do
       namespace 'v1',format: 'json' do
-        resources :users  do
-          get 'index' , action: :userindex  
+        resources :users , only: [:userindex,:create,:destroy,:update,:login]  do
+          
           collection do
-            get ':name/:password/login' , action: :login ,only: [:userindex,:create,:destroy,:update,:login]
+            get ':name/:password/login' , action: :login 
+            get ':user_id/index' , action: :userindex 
+           
         end
       end
     end
