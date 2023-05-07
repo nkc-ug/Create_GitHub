@@ -1,4 +1,4 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -6,7 +6,6 @@ import { FileAboutContext } from "../../App";
 import axios from "../../util/axiosUtil";
 import PrimaryButton from "../atom/PrimaryButton";
 import InfoLayout from "../template/InfoLayout";
-// import WaitModal from "../organism/WaitModal";
 
 const DownloadPage: React.FC = () => {
   const [DownloadModalOpen, setDownloadModalOpen] = useState<boolean>(false);
