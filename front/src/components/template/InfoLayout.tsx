@@ -1,11 +1,12 @@
 import { Box, Stack } from "@mui/material";
 import { TsxChildType } from "../../util/tsType";
-import BaseLayout from "./BaseLayout";
+import { FC } from "react";
+import NavBar from "../organism/NavBar";
 
-const InfoLayout: React.FC<TsxChildType> = (props) => {
-  const { children } = props;
+const InfoLayout: FC<TsxChildType> = ({ children }) => {
   return (
-    <BaseLayout>
+    <>
+      <NavBar />
       <Stack
         justifyContent='center'
         direction='row'
@@ -15,7 +16,7 @@ const InfoLayout: React.FC<TsxChildType> = (props) => {
           {children}
         </Box>
       </Stack>
-    </BaseLayout>
+    </>
   );
 };
 

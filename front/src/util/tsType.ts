@@ -1,6 +1,10 @@
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
-import React from "react";
+import React, { ReactNode } from "react";
+
+export type TsxChildType = {
+  children: ReactNode;
+};
 
 export type ButtonType = {
   state: boolean;

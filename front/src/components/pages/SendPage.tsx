@@ -1,8 +1,7 @@
 import { TextField, Typography } from "@mui/material";
-import { Box, Stack } from "@mui/system";
+import { Stack } from "@mui/system";
 import { useContext } from "react";
 import { FileAboutContext } from "../../App";
-import TopLayout from "../template/BaseLayout";
 import InfoLayout from "../template/InfoLayout";
 
 const SendPage: React.FC = () => {
