@@ -35,11 +35,11 @@ const HomePage: React.FC = () => {
     setSendModalOpen(!SendModalOpen);
     deleteFile();
     try {
-      const res = await axios.get(`api/v1/posts`, {
-        // title:FileAbout.title,
-        // comment:FileAbout.comment,
-        // key:FileAbout.key,
-        // fileData:AddFileList
+      const res = await axios.post(`api/v1/posts`, {
+        title: FileAbout.title,
+        comment: FileAbout.comment,
+        key: FileAbout.key,
+        fileData: AddFileList,
       });
       setSendModalOpen(!setSendModalOpen);
       setFileAbout({
